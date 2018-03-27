@@ -1,0 +1,16 @@
+.list-group-item.list-group-item-action.active {
+  background-color: #1598af;
+  border-color: #1598af;
+}
+
+.proposal-link p {
+  color: #1598af;
+}
+
+.proposal-link:hover {
+  text-decoration: none;
+}
+
+.proposal-link span, h5, h5:hover {
+  color: #1a1b22;
+}
