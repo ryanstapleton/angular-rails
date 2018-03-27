@@ -14,3 +14,7 @@
 .proposal-link span, h5, h5:hover {
   color: #1a1b22;
 }
+
+.list-group {
+  margin-bottom: 30px;
+}
