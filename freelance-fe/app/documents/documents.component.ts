@@ -1,35 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 import { Document } from './document';
+import { DocumentService } from './document.service';
 
 @Component({
   moduleId: module.id,
   selector: 'documents',
   templateUrl: 'documents.component.html',
-  styleUrls: ['document.component.css']
+  styleUrls: ['document.component.css'],
+  providers: [ DocumentService ]
 })
-export class DocumentsComponent {
-  pageTitle: string = "Document Dashboard"
-  documents: Document[] = [
-    {
-      title: "My First Document",
-      description: "Something",
-      file_url: "http:/google.com",
-      updated_at: "11/11/11",
-      image_url: "https://membermouse.com/wp-content/uploads/2016/09/Freelancer-Liability-Featured.png",
-    },
-    {
-      title: "My Second Document",
-      description: "Something",
-      file_url: "http:/google.com",
-      updated_at: "11/11/11",
-      image_url: "https://membermouse.com/wp-content/uploads/2016/09/Freelancer-Liability-Featured.png",
-    },
-    {
-      title: "My Third Document",
-      description: "Something",
-      file_url: "http:/google.com",
-      updated_at: "11/11/11",
-      image_url: "https://membermouse.com/wp-content/uploads/2016/09/Freelancer-Liability-Featured.png",
-    }
-  ]
+export class DocumentsComponent implements OnInit {
+  pageTitle: string = "Document Dashboard";
+  documents: Document[];
+  errorMessage: string;
+  mode = "Observable";
+
+  constructor(
+    private documentService: DocumentService
+  ) {}
+
+  ngOnInit() {
+    let timer = Observable.timer(0, 5000);
+    timer.subscribe(() => this.getDocuments());
+  }
+
+  getDocuments() {
+    this.documentService.getDocuments()
+        .subscribe(
+          documents => this.documents = documents,
+          error => this.errorMessage = <any>error
+        );
+  }
 }
